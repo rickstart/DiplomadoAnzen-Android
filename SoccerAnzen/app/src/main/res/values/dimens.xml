@@ -4,4 +4,7 @@
     <dimen name="width_score">120dp</dimen>
     <dimen name="height_score">30dp</dimen>
     <dimen name="img_score">50dp</dimen>
+    <dimen name="ball">50dp</dimen>
+    <dimen name="size_player">150dp</dimen>
+    <dimen name="font_medium">20sp</dimen>
 </resources>

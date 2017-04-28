@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    tools:context="com.mobintum.socceranzen.PlayerFragment">
+
+    <RelativeLayout
+        android:layout_width="@dimen/size_player"
+        android:layout_height="@dimen/size_player"
+        android:layout_centerInParent="true"
+        android:id="@+id/layoutPlayer">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_player_boy" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_tshirt"
+            android:tint="@color/colorAccent"
+            android:id="@+id/imgTShirt"/>
+
+        <ImageView
+            android:layout_width="@dimen/ball"
+            android:layout_height="@dimen/ball"
+            android:src="@drawable/ic_ball"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:id="@+id/imgBall"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/font_medium"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/layoutPlayer"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtName"/>
+</RelativeLayout>
