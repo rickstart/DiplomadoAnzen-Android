@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_small">10dp</dimen>
+    <dimen name="width_score">120dp</dimen>
+    <dimen name="height_score">30dp</dimen>
+    <dimen name="img_score">50dp</dimen>
+</resources>
