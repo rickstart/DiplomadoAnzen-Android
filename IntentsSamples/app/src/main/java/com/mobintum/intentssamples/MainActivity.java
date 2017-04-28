@@ -58,10 +58,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.e("DEBUG", "requestCode: "+requestCode);
         for (String permission: permissions)
             Log.e("DEBUG", permission);
         for (int index:grantResults)
             Log.e("DEBUG", "i: "+index);
+        if (requestCode == 50){
+            int index = 0;
+            for (String permission: permissions) {
+                if (permission == Manifest.permission.CALL_PHONE) {
+                    if(grantResults[index]==-1){
+                        ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.CALL_PHONE},50);
+                    }else {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:5212345678"));
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                            startActivity(intent);
+                        }else{
+                            ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.CAMERA,Manifest.permission.CALL_PHONE},50);
+                        }
+                    }
+                }
+                index++;
+            }
+
+        }
     }
 
     @Override
@@ -88,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:5212345678"));
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     startActivity(intent);
+                }else{
+                    ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.CALL_PHONE},50);
                 }
                 break;
             case 5:
