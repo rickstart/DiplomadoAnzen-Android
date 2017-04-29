@@ -27,7 +27,7 @@
             android:src="@drawable/ic_ball"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:id="@+id/imgBall"/>
     </RelativeLayout>
     <TextView
