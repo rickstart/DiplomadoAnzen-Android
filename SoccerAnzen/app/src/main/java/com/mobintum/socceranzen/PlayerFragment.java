@@ -27,6 +27,7 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
     private TextView txtName;
     private ImageView imgTShirt;
     private ImageView imgBall;
+    public boolean haveBall = false;
 
     private CallbacksFragment callbacks;
 
@@ -84,10 +85,14 @@ public class PlayerFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showBall(boolean show){
-        if (show)
+        if (show) {
+            haveBall = true;
             imgBall.setVisibility(View.VISIBLE);
-        else
+        }else{
+            haveBall = false;
             imgBall.setVisibility(View.GONE);
+        }
+
     }
 
     public interface CallbacksFragment{
