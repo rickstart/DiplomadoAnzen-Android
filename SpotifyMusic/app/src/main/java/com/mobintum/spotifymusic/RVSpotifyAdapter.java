@@ -40,8 +40,7 @@ public class RVSpotifyAdapter extends RecyclerView.Adapter<RVSpotifyAdapter.View
             public void onClick(View view) {
                 Track track = objects.get(holder.getAdapterPosition());
                 Intent intent = new Intent(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
-                intent.setData(Uri.parse(
-                        track.getUriSpotify()));
+                intent.setData(Uri.parse(track.getUriSpotify()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

@@ -13,6 +13,9 @@ public class Track {
     private String pathImage;
     private String uriSpotify;
 
+    public Track(){
+    }
+
     public Track(String name, String artist, String album, String pathImage, String uriSpotify) {
         this.name = name;
         this.artist = artist;
