@@ -1,5 +1,8 @@
 package com.mobintum.myplaces.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Ricardo on 05/05/17.
  * www.mobintum.com
@@ -7,9 +10,13 @@ package com.mobintum.myplaces.models;
 
 public class Location {
 
+    @Expose
     private String address;
+    @Expose
     private double lat;
+    @Expose
     private double lng;
+    @Expose
     private int distance;
 
     public Location(String address, double lat, double lng, int distance) {

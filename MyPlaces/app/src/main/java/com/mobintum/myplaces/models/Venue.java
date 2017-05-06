@@ -1,5 +1,8 @@
 package com.mobintum.myplaces.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Ricardo on 05/05/17.
  * www.mobintum.com
@@ -7,8 +10,14 @@ package com.mobintum.myplaces.models;
 
 public class Venue {
 
+    @SerializedName("id")
+    @Expose
     private String venueId;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("location")
+    @Expose
     private Location location;
 
     public Venue(String venueId, String name, Location location) {
