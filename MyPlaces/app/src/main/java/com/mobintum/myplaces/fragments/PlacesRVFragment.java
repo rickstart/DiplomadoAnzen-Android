@@ -39,7 +39,7 @@ import java.util.List;
 
 public class PlacesRVFragment extends Fragment implements Response.ErrorListener, Response.Listener<String> {
 
-
+    private static final String URL = "https://api.foursquare.com/v2/venues/search?client_id=KFBD1D243LNTYSNNUWJ1X3ZD4V5JXJ04IB0OEDV11JR1OROX&client_secret=DMTPETRTOC3BRZEK2VIWZV3A1MPIHV4XO2IHMNH4Q4MM5YNQ&v=20130815&ll=19.3891245,-99.2217083&query=";
     private RecyclerView rvPlaces;
     private PlacesRVAdapter adapter;
     private List<Venue> venues = new ArrayList<>();
