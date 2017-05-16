@@ -6,4 +6,8 @@
         android:icon="@drawable/ic_search_white"
         app:showAsAction="always"
         app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/menuMap"
+        android:title="@string/show_map"
+        app:showAsAction="always"/>
 </menu>

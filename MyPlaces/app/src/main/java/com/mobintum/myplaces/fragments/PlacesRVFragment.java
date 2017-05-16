@@ -22,6 +22,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -37,12 +44,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PlacesRVFragment extends Fragment implements Response.ErrorListener, Response.Listener<String> {
+public class PlacesRVFragment extends Fragment implements Response.ErrorListener, Response.Listener<String>, OnMapReadyCallback {
 
     private static final String URL = "https://api.foursquare.com/v2/venues/search?client_id=KFBD1D243LNTYSNNUWJ1X3ZD4V5JXJ04IB0OEDV11JR1OROX&client_secret=DMTPETRTOC3BRZEK2VIWZV3A1MPIHV4XO2IHMNH4Q4MM5YNQ&v=20130815&ll=19.3891245,-99.2217083&query=";
     private RecyclerView rvPlaces;
     private PlacesRVAdapter adapter;
     private List<Venue> venues = new ArrayList<>();
+    private GoogleMap gMap;
+    private boolean isShowMap = true;
+    private SupportMapFragment mapFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +81,26 @@ public class PlacesRVFragment extends Fragment implements Response.ErrorListener
             }
         });
 
+        final MenuItem showMap = menu.findItem(R.id.menuMap);
+        showMap.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (isShowMap) {
+                    showMap.setTitle(getString(R.string.show_map));
+                    isShowMap = false;
+                    mapFragment.getView().setVisibility(View.GONE);
+                    rvPlaces.setVisibility(View.VISIBLE);
+                }else {
+                    showMap.setTitle(getString(R.string.show_list));
+                    isShowMap = true;
+                    mapFragment.getView().setVisibility(View.VISIBLE);
+                    rvPlaces.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
+
+
     }
 
 
@@ -82,6 +112,8 @@ public class PlacesRVFragment extends Fragment implements Response.ErrorListener
         rvPlaces.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         adapter = new PlacesRVAdapter(venues, getActivity().getSupportFragmentManager());
         rvPlaces.setAdapter(adapter);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
         return view;
     }
 
@@ -113,11 +145,32 @@ public class PlacesRVFragment extends Fragment implements Response.ErrorListener
             Gson gson = gsonBuilder.create();
             Type listType = new TypeToken<List<Venue>>(){}.getType();
             venues = gson.fromJson(jsonObject.getJSONObject("response").getJSONArray("venues").toString(),listType);
-            adapter = new PlacesRVAdapter(venues,getActivity().getSupportFragmentManager());
+            loadLocations(venues);
+            adapter = new PlacesRVAdapter(venues, getActivity().getSupportFragmentManager());
             rvPlaces.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void loadLocations(List<Venue> venues){
+        if (gMap!=null){
+            gMap.clear();
+            LatLngBounds.Builder builder = LatLngBounds.builder();
+            for (Venue venue:venues){
+                LatLng latLng = new LatLng(venue.getLocation().getLat(),venue.getLocation().getLng());
+                gMap.addMarker(new MarkerOptions().position(latLng).title(venue.getName()));
+                builder.include(latLng);
+            }
+            LatLngBounds bounds = builder.build();
+            gMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds,16));
+        }
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
     }
 }
