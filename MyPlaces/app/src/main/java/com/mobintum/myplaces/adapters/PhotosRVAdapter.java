@@ -38,7 +38,7 @@ public class PhotosRVAdapter extends RecyclerView.Adapter<PhotosRVAdapter.ViewHo
     @Override
     public void onBindViewHolder(PhotosRVAdapter.ViewHolder holder, int position) {
         final Photo photo = objects.get(position);
-        Picasso.with(context).load(photo.getPrefix()+"200x200"+photo.getSuffix()).into(holder.imgPhoto);
+        Picasso.with(context).load(photo.getPrefix()+"300x300"+photo.getSuffix()).into(holder.imgPhoto);
     }
 
     @Override
