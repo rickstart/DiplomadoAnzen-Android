@@ -13,10 +13,8 @@ public class Venue {
     @SerializedName("id")
     @Expose
     private String venueId;
-    @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("location")
     @Expose
     private Location location;
 

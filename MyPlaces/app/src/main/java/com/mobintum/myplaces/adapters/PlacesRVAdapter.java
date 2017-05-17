@@ -74,6 +74,7 @@ public class PlacesRVAdapter extends RecyclerView.Adapter<PlacesRVAdapter.ViewHo
             btnDetail = (ImageButton) itemView.findViewById(R.id.btnDetail);
             imgPlace = (ImageView) itemView.findViewById(R.id.imgPlace);
         }
-
     }
+
+
 }
