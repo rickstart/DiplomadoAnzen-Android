@@ -1,5 +1,6 @@
 package com.mobintum.feedplaces.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * www.mobintum.com
  */
 
-public class Place {
+public class Place implements Serializable {
 
     private String name;
     private String description;

@@ -10,13 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment"
-        android:textSize="@dimen/font_h1" />
+        android:textSize="@dimen/font_h1"
+        android:id="@+id/txtPlaceName"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-
-        android:text="@string/see_photos"/>
+        android:text="@string/see_photos"
+        android:id="@+id/btnSeePhotos"/>
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
