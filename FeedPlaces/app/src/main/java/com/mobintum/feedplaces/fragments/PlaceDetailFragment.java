@@ -53,7 +53,8 @@ public class PlaceDetailFragment extends Fragment implements OnMapReadyCallback 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_place_detail, container, false);
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = new SupportMapFragment();
+        getChildFragmentManager().beginTransaction().replace(R.id.map,mapFragment).commit();
         mapFragment.getMapAsync(this);
         txtPlaceName = (TextView) view.findViewById(R.id.txtPlaceName);
         txtDescription = (TextView) view.findViewById(R.id.txtDescription);
@@ -61,6 +62,7 @@ public class PlaceDetailFragment extends Fragment implements OnMapReadyCallback 
         txtDescription.setText(place.getDescription());
         return view;
     }
+
 
 
     @Override

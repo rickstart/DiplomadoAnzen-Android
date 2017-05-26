@@ -1,6 +1,7 @@
 package com.mobintum.feedplaces.adapters;
 
 import android.content.Context;
+import android.graphics.ColorFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,10 +28,12 @@ public class PlacesRVAdapter extends RecyclerView.Adapter<PlacesRVAdapter.ViewHo
     private List<Place> objects;
     private Context context;
     private Callbacks callbacks;
+    private boolean favorite;
 
-    public PlacesRVAdapter(List<Place> objects, @NonNull Callbacks callbacks) {
+    public PlacesRVAdapter(List<Place> objects, @NonNull Callbacks callbacks,boolean favorite) {
         this.objects = objects;
         this.callbacks = callbacks;
+        this.favorite = favorite;
     }
 
 
@@ -42,10 +45,16 @@ public class PlacesRVAdapter extends RecyclerView.Adapter<PlacesRVAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         final Place place = objects.get(position);
         holder.txtPlaceName.setText(place.getName());
+        if(place.getIsFavorite()==1)
+            holder.btnFavorite.setColorFilter(context.getResources().getColor(R.color.colorAccent));
+        else
+            holder.btnFavorite.setColorFilter(context.getResources().getColor(android.R.color.white));
+
+
         holder.imgPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,9 +71,15 @@ public class PlacesRVAdapter extends RecyclerView.Adapter<PlacesRVAdapter.ViewHo
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Place.updatePlaceById(context,place);
+                int fav = (place.getIsFavorite()==1)?0:1;
+                objects.get(position).setIsFavorite(fav);
+                if (favorite && fav==0)
+                    objects.remove(position);
+                notifyDataSetChanged();
             }
         });
+        if (place.getPictures().size()>0)
         Picasso.with(context).load(place.getPictures().get(0).getPath()).into(holder.imgPlace);
     }
 

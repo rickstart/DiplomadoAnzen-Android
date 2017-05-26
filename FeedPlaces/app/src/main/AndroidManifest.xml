@@ -12,6 +12,7 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
         <activity
+            android:configChanges="orientation|keyboardHidden"
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

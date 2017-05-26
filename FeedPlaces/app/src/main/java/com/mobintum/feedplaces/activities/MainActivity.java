@@ -1,8 +1,10 @@
 package com.mobintum.feedplaces.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,14 +21,17 @@ import com.mobintum.feedplaces.fragments.RVPlacesFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    boolean landscape = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            this.landscape = true;
+        Log.e("DEBUG KAND", ""+landscape);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -36,6 +41,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            landscape = true;
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            landscape = false;
+        }
+        Log.e("DEBUG", ""+landscape);
     }
 
     @Override
@@ -79,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.content,new RVPlacesFragment()).commit();
                 break;
             case R.id.navFavorites:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content,RVPlacesFragment.newInstance(true)).commit();
                 break;
             case R.id.navNotifications:
                 break;

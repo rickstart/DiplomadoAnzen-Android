@@ -44,6 +44,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mobintum.myplaces.R;
 import com.mobintum.myplaces.adapters.PlacesRVAdapter;
+import com.mobintum.myplaces.models.Photo;
 import com.mobintum.myplaces.models.Venue;
 
 import org.json.JSONException;

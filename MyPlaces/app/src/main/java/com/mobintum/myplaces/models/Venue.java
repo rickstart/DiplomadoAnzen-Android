@@ -3,6 +3,8 @@ package com.mobintum.myplaces.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by Ricardo on 05/05/17.
  * www.mobintum.com

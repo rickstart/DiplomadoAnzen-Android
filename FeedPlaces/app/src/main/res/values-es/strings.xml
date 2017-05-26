@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="see_photos">Ver Fotos</string>
+    <string name="favorites">Favoritos</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="places">Lugares</string>
+    <string name="comments">Comentarios</string>
+</resources>

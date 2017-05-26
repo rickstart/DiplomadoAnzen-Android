@@ -18,6 +18,7 @@ public class Location {
     private double lng;
     @Expose
     private int distance;
+    private Photo photo;
 
     public Location(String address, double lat, double lng, int distance) {
         this.address = address;
