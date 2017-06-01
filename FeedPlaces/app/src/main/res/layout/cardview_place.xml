@@ -20,7 +20,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_bacalar"
                 android:scaleType="centerCrop"
                 android:id="@+id/imgPlace"/>
             <ImageButton

@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mobintum.feedplaces.R;
+import com.mobintum.feedplaces.fragments.NotificationRVFragment;
 import com.mobintum.feedplaces.fragments.RVPlacesFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.content,RVPlacesFragment.newInstance(true)).commit();
                 break;
             case R.id.navNotifications:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content,new NotificationRVFragment()).commit();
                 break;
         }
 

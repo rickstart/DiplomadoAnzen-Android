@@ -16,7 +16,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final Integer VER_1 = 1;
     private static final Integer VER_2 = 2;
     private static final Integer VER_3 = 3;
-    private static final Integer DATABASE_VERSION = VER_3;
+    private static final Integer VER_4 = 4;
+    private static final Integer DATABASE_VERSION = VER_4;
     private Context context;
 
     public DatabaseHelper(Context context) {
@@ -54,6 +55,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "    REFERENCES Address (addressId)" +
                 ");");
 
+        db.execSQL("CREATE TABLE Notification (" +
+                "    notificationId integer NOT NULL CONSTRAINT Notification_pk PRIMARY KEY AUTOINCREMENT," +
+                "    title text NOT NULL," +
+                "    body text," +
+                "    time integer" +
+                ");");
+
         db.execSQL("INSERT INTO Picture (path,isMain,fk_placeId) VALUES ('http://www.pueblosmexico.com.mx/IMG/arton171.jpg',1,1);");
         db.execSQL("INSERT INTO Address (addressId,country,state,addressLine,lat,lng) VALUES (1,'México','Quintana Roo','Quintana Roo',18.548878,-93.763647);");
         db.execSQL("INSERT INTO Place (placeId,name,description,fk_addressId) VALUES (1,'Bacalar','Pueblo Magico',1);");
@@ -84,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Place");
             db.execSQL("DROP TABLE IF EXISTS Address");
             db.execSQL("DROP TABLE IF EXISTS Picture");
+            db.execSQL("DROP TABLE IF EXISTS Notification");
             onCreate(db);
         }
     }
