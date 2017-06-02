@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.mobintum.tabsexample.R;
 import com.mobintum.tabsexample.adapters.CardsPagerAdapter;
+import com.mobintum.tabsexample.fragments.CardTabsFragment;
 import com.mobintum.tabsexample.models.Card;
 
 import java.util.ArrayList;
@@ -38,34 +39,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pagerAdapter = new CardsPagerAdapter(getSupportFragmentManager(),getCards());
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(pagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
 
-    private List<Card> getCards(){
-        List<Card> cards = new ArrayList<>();
-        cards.add(new Card("Bancomer","**** 1620","Jesus"));
-        cards.add(new Card("Banamex","**** 1523","Manuel"));
-        cards.add(new Card("Banorte","**** 1739","Maria"));
-        cards.add(new Card("Banorte","**** 1739","Maria"));
-        return cards;
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -82,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content, new CardTabsFragment()).commit();
             return true;
         }
 

@@ -4,6 +4,7 @@ package com.mobintum.tabsexample.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class CardMainFragment extends Fragment {
         txtCardNumber = (TextView) view.findViewById(R.id.txtCardNumber);
         if (card!=null)
             txtCardNumber.setText(card.getNumber());
+        Log.e("DEBUG CARD", card.getBank());
         return view;
     }
 
